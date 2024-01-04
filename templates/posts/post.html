@@ -1,0 +1,87 @@
+<article id="post-{{ post.id }}" class="post">
+	<header class="post-header">
+		<a href="{% url 'users:profile' user_id=post.user.id %}">
+		{% if post.user.profile_image %}
+			<img src="{{ post.user.profile_image.url }}" alt="">
+		{% endif %}
+		<span>{{ post.user.username }}</span>
+		</a>
+		{% if user != post.user %}
+			<form action="{% url 'users:follow' user_id=post.user.id %}?next={{action_redirect_url}}" method="POST">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-primary">
+					{% if post.user in user.following.all %}
+						Unfollow
+					{% else %}
+						Follow
+					{% endif %}
+				</button>
+			</form>
+		{% endif %}
+	</header>
+	{% comment %} 이미지 슬라이드 {% endcomment %}
+	<div class="post-images splide">
+		<div class="splide__track">
+			<ul class="splide__list">
+				{% for image in post.postimage_set.all %}
+					{% if image.photo %}
+						<li class="splide__slide">
+							<img src="{{ image.photo.url }}">
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% comment %} 글내용 {% endcomment %}
+	<div class="post-content">
+		{{post.content|linebreaksbr}}
+		<div class="post-tags">
+			{% for tag in post.tags.all %}
+				<a href="{% url 'posts:tags' tag_name=tag.name %}">#{{tag.name}}</a>
+			{% endfor %}
+		</div>
+	</div>
+	{% comment %} 좋아요 댓글 갯수 {% endcomment %}
+	<div class="post-buttons">
+		<form action="{% url 'posts:post_like' post_id=post.id %}?next={{ action_redirect_url }}" method="POST">
+			{% csrf_token %}
+			<button 
+				type="submit"
+				{% if user in post.like_users.all %}
+					style = "color:red,:" 
+					{% endif %}>
+						Likes({{ post.like_users.count }})
+			</button>
+		</form>
+		<span> Comments({{post.comment_set.count}}) </span>
+	</div>
+	{% comment %} 댓글 {% endcomment %}
+	<div class="post-comments">
+		<ul>
+			{% for comment in post.comment_set.all %}
+				<li>
+					<span> {{comment.user.username}} </span>
+					<span> {{comment.content}} </span>
+
+					{% if user == comment.user %}
+						<form action="{% url 'posts:comment_delete' comment_id=comment.id %}" method="post">
+							{% csrf_token %}
+							<button type="submit">삭제</button>
+						</form>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% comment %} 작성일자 댓글입력창 {% endcomment %}
+	<small>{{post.created}}</small>
+	<div class="post-comment-create">
+		<form method="POST" action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}">
+			{% csrf_token %}
+			<input type="hidden" name="post" value="{{ post.id }}" />
+			{{ comment_form.content }}
+			<button type="submit">게시</button>
+		</form>
+	</div>
+</article>
