@@ -1,14 +1,25 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
 
-<div class="d-flex justify-content-center align-items-center" id="login">
-	<form class="card text-center" action="" method="post">
-		<div class="card-body">
-			<h1>Pystagram</h1>
-			{% csrf_token %} {{form.as_p}}
-			<button type="submit" class="d-grid btn btn-primary w-100">로그인</button>
-			<a href="{% url 'users:signup' %}" class="">회원가입 페이지로 이동</a>
-		</div>
-	</form>
-</div>
+{% block content %}
 
-{% endblock%}
+  <div class="d-flex" id="login" style="height: 100vh;">
+    <div class="m-auto">
+      <form class="card text-center" action="" method="post" style="width: 28rem;">
+        <div class="card-body mb-4">
+          <h1 class="fw-bold my-5">Pystagram</h1>
+          {% csrf_token %}
+          <div class="row col-auto text-start mx-4">
+            {{form.as_p}}
+            <div class="row col-auto w-100 my-1 ms-0">
+              <button type="submit" class="btn btn-primary">로그인</button>
+            </div>
+          </div>
+          <a href=" {% url 'users:signup' %}" class="fs-6 text-black-50 text-decoration-none mt-1">회원가입 페이지로 이동</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- justify-content-center align-items-center h-100 mt-5 pt-5 -->
+
+  {% endblock%}

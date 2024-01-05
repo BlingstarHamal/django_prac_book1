@@ -7,21 +7,54 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         min_length=3,
         widget=forms.TextInput(
-            attrs={"placeholder": "사용자명 (3자리 이상)", 'autocomplete': 'off'})
+            attrs={"class":"form-control",
+                    "placeholder": "사용자명 (3자리 이상)",
+                    'autocomplete': 'off',
+                    })
     )
     password = forms.CharField(
         min_length=4,
         widget=forms.PasswordInput(
-            attrs={"placeholder": "비밀번호 (4자리 이상)", 'autocomplete': 'asdadasdasd'})
+            attrs={"class":"form-control",
+                    "placeholder": "비밀번호 (4자리 이상)", 
+                    'autocomplete': 'asdadasdasd',
+                    })
     )
 
 
 class SignupForm(forms.Form):
-    username = forms.CharField()
-    password1 = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(widget=forms.PasswordInput)
-    profile_image = forms.ImageField()
-    short_description = forms.CharField()
+    username = forms.CharField(
+        min_length=3,
+        widget=forms.TextInput(
+            attrs={"class":"form-control",
+                    "placeholder": "사용자명 (3자리 이상)",
+                    'autocomplete': 'off',
+                    })
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class":"form-control",
+                    "placeholder": "비밀번호 (4자리 이상)", 
+                    'autocomplete': 'asdadasdasd',
+                    }))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={"class":"form-control",
+                    "placeholder": "비밀번호 (4자리 이상)", 
+                    'autocomplete': 'asdadasdasd',
+                    }))
+    profile_image = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={"class":"form-control"}
+        )
+    )
+    short_description = forms.CharField(
+        widget=forms.TextInput(
+            attrs={"class":"form-control",
+                    "placeholder": "간단 소개",
+                    'autocomplete': 'off',
+                    })
+    )
 
     def clean_username(self):
         username = self.cleaned_data["username"]

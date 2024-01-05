@@ -1,7 +1,21 @@
-<nav>
-	<h1>
-		<a href="{% url 'posts:feeds' %}">Pystagram</a>
-	</h1>
-	<a href="{% url 'posts:post_add' %}">Add Post</a>
-	<a href="{% url 'users:logout' %}">Logout</a>
+<nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <h1>
+      <a class="navbar-brand fw-bold" href="{% url 'posts:feeds' %}">Pystagram</a>
+    </h1>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="{% url 'posts:post_add' %}" class="nav-link">Add Post</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'users:logout' %}" class="nav-link">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>

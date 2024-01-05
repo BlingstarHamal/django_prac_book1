@@ -1,10 +1,20 @@
 {% extends 'base.html' %} {% block content %}
-<div id="signup">
-	<form action="" method="post" enctype="multipart/form-data" autocomplete="off">
-		<h1>Pystagram</h1>
-		{% csrf_token %} {{form.as_p}}
-		<button type="submit" class="btn btn-signup">회원가입</button>
-		<a href="{% url 'users:login' %}">로그인 페이지로 이동</a>
-	</form>
+<div class="d-flex" id="signup" style="height: 100vh;">
+	<div class="m-auto">
+		<form class="card text-center" style="width: 28rem;" action="" method="post" enctype="multipart/form-data">
+			<div class="card-body mb-4">
+				<h1 class="fw-bold my-5">Pystagram</h1>
+				{% csrf_token %}
+				<div class="row col-auto text-start mx-4">
+					{{form.as_p}}
+					<div class="row col-auto w-100 my-1 ms-0">
+						<button type="submit" class="btn btn-primary">회원가입</button>
+					</div>
+				</div>
+				<a href="{% url 'users:login' %}" class="fs-6 text-black-50 text-decoration-none">로그인 페이지로 이동</a>
+			</div>
+		</form>
+	</div>
 </div>
+
 {% endblock %}

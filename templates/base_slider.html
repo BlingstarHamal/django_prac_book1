@@ -1,18 +1,19 @@
 {% extends "_base.html" %}
 {% load static %}
 
+{% comment %} 이미지 슬라이드 기능은 일단 유지 {% endcomment %}
 {% block head %}
-	<link href="{% static 'splide/splide.css' %}" rel="stylesheet">
-	<script src="{% static 'splide/splide.js' %}"></script>
-{% endblock %} 
+  <link href="{% static 'splide/splide.css' %}" rel="stylesheet">
+  <script src="{% static 'splide/splide.js' %}"></script>
+{% endblock %}
 
 {% block base_content %}
-	{% include "nav.html" %}
-	{% block content %}{% endblock %}
-	<script>
-		const elms = document.getElementsByClassName('splide');
-		for (let i = 0; i < elms.length; i++) {
-			new Splide(elms[i]).mount();
-		}
-	</script>
+  {% include "nav.html" %}
+  {% block content %}{% endblock %}
+  <script>
+    const elms = document.getElementsByClassName('splide');
+    for (let i = 0; i < elms.length; i++) {
+      new Splide(elms[i]).mount();
+    }
+  </script>
 {% endblock %}
