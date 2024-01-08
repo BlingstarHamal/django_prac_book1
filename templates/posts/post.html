@@ -1,7 +1,7 @@
 <div class="container mt-5 mb-5 pt-5">
   <div class="card m-auto w-75">
     <article id="post-{{ post.id }}" class="post">
-      <div class="card-header">
+      <div class="card-header bg-white">
         <div class="row mt-1">
           <div class="col-6 text-start">
             <a href="{% url 'users:profile' user_id=post.user.id %}" class="text-decoration-none">
@@ -109,7 +109,7 @@
       </div>
 
       <!-- {% comment %} 댓글입력창 {% endcomment %} -->
-      <div class="card-footer">
+      <div class="card-footer bg-white">
         <div class="post-comment-create">
           <form method="POST" class="row" action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}">
             {% csrf_token %}

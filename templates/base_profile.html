@@ -1,10 +1,12 @@
-{% extends "base_nav.html" %}
-
-{% block content %}
-<div id="profile">
+{% extends "base_nav.html" %} {% block content %}
+<div class="ms-2" id="profile">
   <div class="info d-flex mt-5 mb-3 pt-5 pb-4 border-1 border-bottom border-bg-secondary">
     {% if user.profile_image %}
-    <img src="{{user.profile_image.url}}" class="rounded-circle" alt="" style="height: 200px; width: 200px;">
+    <img
+      src="{{user.profile_image.url}}"
+      class="rounded-circle"
+      alt=""
+      style="height: 150px; width: 150px" />
     {% endif %}
 
     <div class="info-texts mt-4 ms-3">
@@ -13,20 +15,30 @@
         <dl class="d-flex">
           <dt class="me-1 fw-light">Posts</dt>
           <dd class="me-3">
-            <a href="{% url 'users:profile' user_id=user.id %}" class="fw-bold text-black" style="text-decoration:none">
-              {{user.post_set.count}}</a>
+            <a
+              href="{% url 'users:profile' user_id=user.id %}"
+              class="fw-bold text-black"
+              style="text-decoration: none">
+              {{user.post_set.count}}</a
+            >
           </dd>
           <dt class="me-1 fw-light">Followers</dt>
           <dd class="me-3">
-            <a href="{% url 'users:followers' user_id=user.id %}" class="fw-bold text-black"
-              style="text-decoration:none">
-              {{user.followers.count}}</a>
+            <a
+              href="{% url 'users:followers' user_id=user.id %}"
+              class="fw-bold text-black"
+              style="text-decoration: none">
+              {{user.followers.count}}</a
+            >
           </dd>
           <dt class="me-1 fw-light">Following</dt>
           <dd>
-            <a href="{% url 'users:following' user_id=user.id %}" class="fw-bold text-black"
-              style="text-decoration:none">
-              {{user.following.count}}</a>
+            <a
+              href="{% url 'users:following' user_id=user.id %}"
+              class="fw-bold text-black"
+              style="text-decoration: none">
+              {{user.following.count}}</a
+            >
           </dd>
         </dl>
       </div>
