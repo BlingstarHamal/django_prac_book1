@@ -3,7 +3,8 @@
 
 {% block content %}
   <div id="feeds" class="post-container">
-    {% for post in posts %}
+    {% comment %} 최신글을 위로가게 reversed {% endcomment %}
+    {% for post in posts reversed %}
       {% url 'posts:feeds' as action_redirect_to %}
       {% include "posts/post.html" with action_redirect_url=action_redirect_to|concat:'#post-'|concat:post.id %}
     {% endfor %}

@@ -1,19 +1,21 @@
 {% extends 'base_nav.html' %}
 {% block content %}
-<div id="post-add">
-	<h1>Post 작성</h1>
-	<form action="" method="post" enctype="multipart/form-data">
-		{% csrf_token %}
-		<div>
-			<label for="id_images">이미지</label>
-			<input type="file" name="images" id="id_images" multiple />
-		</div>
-		{{form.as_p}}
-		<div>
-			<label for="id_tags">해시태그</label>
-			<input type="text" id="id_tags" name="tags" placeholder="쉼표(,)로 구분하여 여러 태그 입력" />
-		</div>
-		<button type="submit">게시</button>
-	</form>
-</div>
+  <div class="mt-5 mb-5 ms-3 me-3 pt-5" id="post-add">
+    <h3 class="fw-light">Post 작성</h3>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div>
+        <label for="id_images">이미지</label>
+        <div class="input-group">
+          <input type="file" class="form-control" name="images" id="id_images" multiple="multiple"/>
+        </div>
+      </div>
+      {{form.as_p}}
+      <div>
+        <label for="id_tags">해시태그</label>
+        <input type="text" class="form-control" id="id_tags" name="tags" placeholder="쉼표(,)로 구분하여 여러 태그 입력"/>
+      </div>
+      <button type="submit" class="btn btn-outline-primary mt-2">게시</button>
+    </form>
+  </div>
 {% endblock %}

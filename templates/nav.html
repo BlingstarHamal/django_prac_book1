@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
+<nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top border-1 border-bottom border-bg-secondary">
   <div class="container-fluid">
     <h1>
       <a class="navbar-brand fw-bold" href="{% url 'posts:feeds' %}">Pystagram</a>
@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="{% url 'posts:post_add' %}" class="nav-link">Add Post</a>
+          <a href="{% url 'posts:post_add' %}" class="nav-link text-primary">Add Post</a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'users:logout' %}" class="nav-link">Logout</a>
+          <a href="{% url 'users:logout' %}" class="nav-link text-primary">Logout</a>
         </li>
       </ul>
     </div>

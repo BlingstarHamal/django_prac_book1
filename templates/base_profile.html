@@ -2,35 +2,37 @@
 
 {% block content %}
 <div id="profile">
-    <div class="info">
-        {% if user.profile_image %}
-        <img src="{{user.profile_image.url}}" alt="">
-        {% endif %}
+  <div class="info d-flex mt-5 mb-3 pt-5 pb-4 border-1 border-bottom border-bg-secondary">
+    {% if user.profile_image %}
+    <img src="{{user.profile_image.url}}" class="rounded-circle" alt="" style="height: 200px; width: 200px;">
+    {% endif %}
 
-        <div class="info-texts">
-            <h1>{{user.username}}</h1>
-            <div class="counts">
-                <dl>
-                    <dt>Posts</dt>
-                    <dd>
-                        <a href="{% url 'users:profile' user_id=user.id %}">
-                        {{user.post_set.count}}</a>
-                    </dd>
-                    <dt>Followers</dt>
-                    <dd>
-                        <a href="{% url 'users:followers' user_id=user.id %}">
-                            {{user.followers.count}}</a>
-                        </dd>
-                    <dt>Following</dt>
-                    <dd>
-                        <a href="{% url 'users:following' user_id=user.id %}">
-                            {{user.following.count}}</a>
-                        </dd>
-                </dl>
-            </div>
-            <p>{{user.short_description}}</p>
-        </div>
+    <div class="info-texts mt-4 ms-3">
+      <h1 class="fw-normal">{{user.username}}</h1>
+      <div class="counts">
+        <dl class="d-flex">
+          <dt class="me-1 fw-light">Posts</dt>
+          <dd class="me-3">
+            <a href="{% url 'users:profile' user_id=user.id %}" class="fw-bold text-black" style="text-decoration:none">
+              {{user.post_set.count}}</a>
+          </dd>
+          <dt class="me-1 fw-light">Followers</dt>
+          <dd class="me-3">
+            <a href="{% url 'users:followers' user_id=user.id %}" class="fw-bold text-black"
+              style="text-decoration:none">
+              {{user.followers.count}}</a>
+          </dd>
+          <dt class="me-1 fw-light">Following</dt>
+          <dd>
+            <a href="{% url 'users:following' user_id=user.id %}" class="fw-bold text-black"
+              style="text-decoration:none">
+              {{user.following.count}}</a>
+          </dd>
+        </dl>
+      </div>
+      <p class="fw-light">{{user.short_description}}</p>
     </div>
-    {% block bottom_data %}{% endblock  %}
+  </div>
+  {% block bottom_data %}{% endblock %}
 </div>
-{% endblock  %}
+{% endblock %}

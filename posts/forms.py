@@ -13,7 +13,11 @@ class CommentForm(forms.ModelForm):
         widgets = {
             "content": forms.Textarea(
                 attrs={
+                    "class": "form-control",
+                    "rows": "1",
+                    "cols": "80",
                     "placeholder": "댓글달기...",
+                    "style":"border:none; resize:none;"
                 }
             )
         }
@@ -25,3 +29,10 @@ class PostForm(forms.ModelForm):
         fields = [
             "content",
         ]
+        widgets = {
+            "content": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                }
+            )
+        }
