@@ -15,9 +15,8 @@ class CommentForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "rows": "1",
-                    "cols": "80",
                     "placeholder": "댓글달기...",
-                    "style":"border:none; resize:none;"
+                    "style":"resize:none; border:none;"
                 }
             )
         }

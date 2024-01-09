@@ -31,22 +31,29 @@
           </div>
         </div>
 
-        <!-- {% comment %} 이미지 슬라이드 {% endcomment %} -->
-        <div class="post-images splide my-2">
-          <div class="splide__track">
-            <ul class="splide__list">
-              {% for image in post.postimage_set.all %}
-                {% if image.photo %}
-                  <li class="splide__slide">
-                    <div class="img-fluid">
-                      <img src="{{ image.photo.url }}" class="card-img " style="background-size: contain">
-                    </div>
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
+        <div id="demo-{{post.id}}" class="carousel slide mt-1" data-bs-touch="false" data-bs-interval="false">
+          <div class="carousel-indicators">
+            {% for image in post.postimage_set.all %}
+              <button data-bs-target="#demo-{{post.id}}" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %}active{% endif %}"></button>
+            {% endfor %}
           </div>
+
+          <div class="carousel-inner">
+            {% for image in post.postimage_set.all %}
+              <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                <img src="{{ image.photo.url }}" class="card-img " style="background-size: contain">
+              </div>
+            {% endfor %}
+          </div>
+
+          <button class="carousel-control-prev" data-bs-target="#demo-{{post.id}}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" data-bs-target="#demo-{{post.id}}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
         </div>
+
         <!-- {% comment %} 글내용 {% endcomment %} -->
         <div class="post-content">
           {{post.content|linebreaksbr}}
@@ -111,13 +118,11 @@
       <!-- {% comment %} 댓글입력창 {% endcomment %} -->
       <div class="card-footer bg-white">
         <div class="post-comment-create">
-          <form method="POST" class="row" action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}">
+          <form method="POST" class="" action="{% url 'posts:comment_add' %}?next={{ action_redirect_url }}">
             {% csrf_token %}
-            <input type="hidden" name="post" value="{{ post.id }}"/>
-            <div class="col-auto">
+            <div class="input-group">
+              <input type="hidden" class="form-control" name="post" value="{{ post.id }}"/>
               {{ comment_form.content }}
-            </div>
-            <div class="col-auto">
               <button type="submit" class="btn btn-link" style="text-decoration:none; cursor: pointer;">게시</button>
             </div>
           </form>
