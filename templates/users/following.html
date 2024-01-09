@@ -8,16 +8,16 @@
           {% if relationship.to_user.profile_image %}
             <img src="{{ relationship.to_user.profile_image.url }}" alt="" class="rounded-circle" style="height: 50px; width: 50px"/>
           {% endif %}
-        </a>
-        <div class="row ps-1 relationship-info">
-          <a class="fw-medium text-black" href="{% url 'users:profile' user_id=relationship.from_user.id %}" style="text-decoration: none">
-            {{ relationship.to_user.username }}
-          </a>
-          <a class="fw-medium text-black-50" href="{% url 'users:profile' user_id=relationship.from_user.id %}" style="text-decoration: none; font-size: 11px">
-            {{ relationship.created|date:"y.m.d" }}
-          </a>
-        </div>
 
+          <div class="row ps-1 relationship-info">
+            <a class="fw-medium text-black" href="{% url 'users:profile' user_id=relationship.to_user.id %}" style="text-decoration: none">
+              {{ relationship.to_user.username }}
+            </a>
+            <a class="fw-medium text-black-50" href="{% url 'users:profile' user_id=relationship.to_user.id %}" style="text-decoration: none; font-size: 11px">
+              {{ relationship.created|date:"y.m.d" }}
+            </a>
+          </div>
+        </a>
       </div>
     {% endfor %}
   </div>

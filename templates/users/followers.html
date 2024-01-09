@@ -1,24 +1,26 @@
 {% extends "base_profile.html" %}
 {% block bottom_data %}
-  <div class="relationships">
-    <h5 class="fw-semibold">Followers</h5>
-    {% for relationship in relationships %}
-      <div class="relationship mb-1 border-1 pb-1 border-bottom border-bg-secondary d-flex">
-        <a href="{% url 'users:profile' user_id=relationship.from_user.id %}">
-          {% if relationship.from_user.profile_image %}
-            <img src="{{ relationship.from_user.profile_image.url }}" alt="" class="rounded-circle" style="height: 50px; width: 50px"/>
-          {% endif %}
+<div class="relationships">
+  <h5 class="fw-semibold">Followers</h5>
+  {% for relationship in relationships %}
+  <div class="relationship mb-1 border-1 pb-1 border-bottom border-bg-secondary d-flex">
+    <a href="{% url 'users:profile' user_id=relationship.from_user.id %}">
+      {% if relationship.from_user.profile_image %}
+      <img src="{{ relationship.from_user.profile_image.url }}" alt="" class="rounded-circle"
+        style="height: 50px; width: 50px" />
+      {% endif %}
+      <div class="row ps-1 relationship-info">
+        <a class="fw-medium text-black" href="{% url 'users:profile' user_id=relationship.from_user.id %}"
+          style="text-decoration: none">
+          {{ relationship.from_user.username }}
         </a>
-
-        <div class="row ps-1 relationship-info">
-          <a class="fw-medium text-black" href="{% url 'users:profile' user_id=relationship.from_user.id %}" style="text-decoration: none">
-            {{ relationship.from_user.username }}
-          </a>
-          <a class="fw-medium text-black-50" href="{% url 'users:profile' user_id=relationship.from_user.id %}" style="text-decoration: none; font-size: 11px">
-            {{ relationship.created|date:"y.m.d" }}
-          </a>
-        </div>
+        <a class="fw-medium text-black-50" href="{% url 'users:profile' user_id=relationship.from_user.id %}"
+          style="text-decoration: none; font-size: 11px">
+          {{ relationship.created|date:"y.m.d" }}
+        </a>
       </div>
-    {% endfor %}
+    </a>
   </div>
+  {% endfor %}
+</div>
 {% endblock %}
