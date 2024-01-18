@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from posts.models import Post, Comment, PostImage, HashTag
-from posts.forms import CommentForm, PostForm
+# from posts.forms import CommentForm, PostForm
+from posts.forms import CommentForm, NoticeWriteForm
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
@@ -10,9 +11,9 @@ from django.urls import reverse
 
 
 def feeds(request):
-    if not request.user.is_authenticated:
-        return redirect("users:login")
-
+    # if not request.user.is_authenticated:
+    #     return redirect("/users/login/")
+    print(request.user)
     posts = Post.objects.all()
     comment_form = CommentForm()
     context = {
@@ -52,9 +53,13 @@ def comment_delete(request, comment_id):
 
 
 def post_add(request):
+    if not request.user.is_authenticated:
+        return redirect("/users/login/")
+    
     if request.method == "POST":
         # content는 POSTFORM처리
-        form = PostForm(request.POST)
+        # form = PostForm(request.POST)
+        form = NoticeWriteForm(request.POST)
 
         if form.is_valid():
             # user값은 request에서 가져와 자동 할당
@@ -84,10 +89,19 @@ def post_add(request):
 
     # get에선 빈 form 출력
     else:
-        form = PostForm()
+        form = NoticeWriteForm()
 
     context = {"form": form}
     return render(request, "posts/post_add.html", context)
+
+def post_delete(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if post.user == request.user:
+        post.delete()
+        url = reverse("posts:feeds")
+        return HttpResponseRedirect(url)
+    else:
+        return HttpResponseForbidden("이 댓글을 삭제할 권한이 없습니다.")
 
 
 def tags(request, tag_name):

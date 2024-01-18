@@ -6,7 +6,10 @@
     <div class="m-auto">
       <form class="card text-center" action="" method="post" style="width: 28rem;">
         <div class="card-body mb-4">
-          <h1 class="fw-bold my-5">Pystagram</h1>
+          <h1 class="fw-bold my-5">
+            <a class="text-black text-decoration-none" href="{% url 'posts:feeds' %}">Pystagram</a>
+          </h1>
+
           {% csrf_token %}
           <div class="row col-auto text-start mx-4">
             {{form.as_p}}

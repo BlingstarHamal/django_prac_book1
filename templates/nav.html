@@ -1,21 +1,27 @@
 <nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top border-1 border-bottom border-bg-secondary">
   <div class="container-fluid">
     <h1>
-      <a class="navbar-brand fw-bold" href="{% url 'posts:feeds' %}">Pystagram</a>
+      <a class="navbar-brand fw-bold ms-2" href="{% url 'posts:feeds' %}">Pystagram</a>
     </h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse ms-2" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="{% url 'posts:post_add' %}" class="nav-link text-primary">Add Post</a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'posts:post_add' %}" class="nav-link text-primary">Add Post</a>
+          </li>
+          <li>
+            <a href="{% url 'users:logout' %}" class="nav-link text-primary">Logout</a>
+          </li>
+        {% else %}
+          <a href="{% url 'users:login' %}" class="nav-link text-primary">Login</a>
         </li>
-        <li class="nav-item">
-          <a href="{% url 'users:logout' %}" class="nav-link text-primary">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+      {% endif %}
+    </li>
+  </ul>
+</div>
+</div>
 </nav>

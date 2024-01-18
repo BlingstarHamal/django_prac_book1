@@ -10,7 +10,7 @@ from django.urls import reverse
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("post:feeds")
+        return redirect("posts:feeds")
 
     if request.method == "POST":
         form = LoginForm(data=request.POST)
@@ -40,19 +40,25 @@ def logout_view(request):
 
 
 def signup(request):
+    # post 요청시 form이 유효하다면 최종적으로 redirect
     if request.method == "POST":
         form = SignupForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("posts:feeds")
+            return redirect("/posts/feeds/")
+        
+    # get요청시 빈 form    
     else:
         form = SignupForm()
 
+    # post 요청 form이 유효하지 않거나, get으로 빈form이 생성되면 에러를 포함한 form이 출력
     context = {"form": form}
     return render(request, "users/signup.html", context)
 
+
 def profile(request,user_id):
+    print(request.user)
     user = get_object_or_404(User, id=user_id)
     context = {
         "user" :user,

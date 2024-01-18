@@ -4,7 +4,12 @@ from users.models import User
 
 
 class LoginForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+        
     username = forms.CharField(
+        label='사용자 이름',
         min_length=3,
         widget=forms.TextInput(
             attrs={"class":"form-control",
@@ -13,6 +18,7 @@ class LoginForm(forms.Form):
                     })
     )
     password = forms.CharField(
+        label='비밀번호',
         min_length=4,
         widget=forms.PasswordInput(
             attrs={"class":"form-control",
@@ -23,7 +29,12 @@ class LoginForm(forms.Form):
 
 
 class SignupForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+    
     username = forms.CharField(
+        label='사용자 이름',
         min_length=3,
         widget=forms.TextInput(
             attrs={"class":"form-control",
@@ -32,23 +43,27 @@ class SignupForm(forms.Form):
                     })
     )
     password1 = forms.CharField(
+        label='비밀번호',
         widget=forms.PasswordInput(
             attrs={"class":"form-control",
                     "placeholder": "비밀번호 (4자리 이상)", 
                     'autocomplete': 'asdadasdasd',
                     }))
     password2 = forms.CharField(
+        label='비밀번호 확인',
         widget=forms.PasswordInput(
             attrs={"class":"form-control",
                     "placeholder": "비밀번호 (4자리 이상)", 
                     'autocomplete': 'asdadasdasd',
                     }))
     profile_image = forms.ImageField(
+        label='프로필 이미지',
         widget=forms.FileInput(
             attrs={"class":"form-control"}
         )
     )
     short_description = forms.CharField(
+        label='자기소개',
         widget=forms.TextInput(
             attrs={"class":"form-control",
                     "placeholder": "간단 소개",

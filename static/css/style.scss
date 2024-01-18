@@ -1,0 +1,31 @@
+
+// $text-color: #fff;
+// $accent-color: #e4457d;
+// $hover-color: #cd2f66;
+// $offset: .125em;
+// $border-width: .125em;
+// $transition: .2s ease-out;
+
+// div .d-inline-block .btn {
+//     padding: .66em 2.25em;
+//     text-decoration: none;
+//     position: relative;
+//     display: inline-block;
+//     &:after {
+//         content: '';
+//         display: block;
+//         width: 100%;
+//         height: 100%;
+//         position: absolute;
+//         top: $offset;
+//         left: $offset;
+//         border-bottom: $border-width solid;
+//         border-right: $border-width solid;
+//     }
+//     &:active {
+//         transform: translate($offset, $offset);
+//         &:after {
+//             transform: translate(-$offset, -$offset);
+//         }
+//     }
+// }

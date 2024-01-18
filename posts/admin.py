@@ -4,14 +4,16 @@ from posts.models import Post, PostImage, Comment, HashTag
 import admin_thumbnails
 from django.db.models import ManyToManyField
 from django.forms import CheckboxSelectMultiple
+
 # Register your models here.
 
 
+# foreignkey로 연결된 다른 객체들을 보려면 inline 기능 사용
 class CommentInline(admin.TabularInline):
     model = Comment
     extra = 1
 
-
+# admin 섬내일 제공 오픈소스 'django-admin-thumbnails<0.3'
 @admin_thumbnails.thumbnail("photo")
 class PostImageInline(admin.TabularInline):
     model = PostImage
@@ -32,6 +34,7 @@ class LikeUserInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = [
         "id",
+        "title",
         "content",
     ]
     inlines = [
@@ -45,6 +48,8 @@ class PostAdmin(admin.ModelAdmin):
             "widget": CheckboxSelectMultiple
         },
     }
+
+
 
 
 @admin.register(PostImage)

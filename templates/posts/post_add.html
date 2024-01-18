@@ -1,21 +1,30 @@
 {% extends 'base_nav.html' %}
 {% block content %}
+
   <div class="mt-5 mb-5 ms-3 me-3 pt-5" id="post-add">
     <h3 class="fw-light">Post 작성</h3>
     <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <div>
-        <label for="id_images">이미지</label>
-        <div class="input-group">
-          <input type="file" class="form-control" name="images" id="id_images" multiple="multiple"/>
+      <!-- content summernote -->
+      <div class="summernote mt-2">
+        <!-- <textarea id="summernote" name="editordata"></textarea> -->
+        {{form}}
         </div>
-      </div>
-      {{form.as_p}}
-      <div>
-        <label for="id_tags">해시태그</label>
-        <input type="text" class="form-control" id="id_tags" name="tags" placeholder="쉼표(,)로 구분하여 여러 태그 입력"/>
-      </div>
-      <button type="submit" class="btn btn-outline-primary mt-2">게시</button>
-    </form>
-  </div>
-{% endblock %}
+        <!-- images -->
+        <div>
+          <label for="id_images">이미지</label>
+          <div class="input-group">
+            <input type="file" class="form-control" name="images" id="id_images" multiple="multiple"/>
+          </div>
+        </div>
+        <!-- tags -->
+        <div class="mt-2">
+          <label for="id_tags">해시태그</label>
+          <input type="text" class="form-control" id="id_tags" name="tags" placeholder="쉼표(,)로 구분하여 여러 태그 입력"/>
+        </div>
+        <div class="d-flex justify-content-center mt-2">
+          <button type="submit" class="btn btn-outline-primary">게시</button>
+        </div>
+      </form>
+    </div>
+  {% endblock %}

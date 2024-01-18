@@ -22,6 +22,7 @@ from django.urls import path, include
 from config.views import index
 
 urlpatterns = [
+    path('summernote/',include('django_summernote.urls')),
     path('admin/', admin.site.urls),
     path("users/", include("users.urls")),
     path("posts/", include("posts.urls")),
@@ -32,3 +33,6 @@ urlpatterns += static(
     prefix=settings.MEDIA_URL,
     document_root=settings.MEDIA_ROOT
 )
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
